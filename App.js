@@ -43,7 +43,7 @@ export default function App() {
       // Prepare OpenAI API request payload with image data
       const imageDataUrl = `data:image/jpeg;base64,${photo.base64}`;
       const payload = {
-        model: 'gpt-4-vision',
+        model: 'gpt-4o',
         messages: [
           {
             role: 'user',
@@ -54,6 +54,8 @@ export default function App() {
           }
         ]
       };
+
+
       const response = await fetch('https://api.openai.com/v1/chat/completions', {
         method: 'POST',
         headers: {
@@ -62,10 +64,17 @@ export default function App() {
         },
         body: JSON.stringify(payload)
       });
+
       if (!response.ok) {
+        const errorData = await response.json();
+        console.error('OpenAI API error response:', errorData);  // 🔍 log the full error
         throw new Error(`OpenAI API error: ${response.status}`);
       }
+
       const data = await response.json();
+
+
+
       const description = data.choices?.[0]?.message?.content;
       setResult(description || "No description found.");
     } catch (error) {
