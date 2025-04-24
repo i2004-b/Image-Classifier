@@ -4,7 +4,7 @@ import { CameraView, useCameraPermissions } from 'expo-camera';
 
 
 export default function App() {
-  const [permission, requestPermission] = useCameraPermissions();
+  const [permission, requestPermission] = useCameraPermissions(); // Permission handler
   const cameraRef = useRef(null);
   const [capturedImage, setCapturedImage] = useState(null);
   const [result, setResult] = useState("");
@@ -12,7 +12,7 @@ export default function App() {
 
   // Show a placeholder while permission is being asked
   if (!permission) {
-    return <View />; // Could also show a loading indicator
+    return <View />;
   }
 
   // If permission not granted, prompt the user
@@ -123,7 +123,7 @@ export default function App() {
       ) : (
         <Text style={styles.resultText}>{result}</Text>
       )}
-      <Button title="Retake Photo" onPress={handleRetake} />
+      <Button title="New Photo" onPress={handleRetake} />
     </View>
   );
 }
@@ -143,7 +143,7 @@ const styles = StyleSheet.create({
     padding: 20
   },
   captureButton: {
-    backgroundColor: '#ffffffcc',  // semi-transparent white
+    backgroundColor: '#ffffffcc',
     paddingHorizontal: 20,
     paddingVertical: 12,
     borderRadius: 8
