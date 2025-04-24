@@ -48,7 +48,7 @@ export default function App() {
           {
             role: 'user',
             content: [
-              { type: 'text', text: 'Describe this image.' },
+              { type: 'text', text: 'Describe this image to a person in a concise but detailed way.' },
               { type: 'image_url', image_url: { url: imageDataUrl } }
             ]
           }
@@ -119,11 +119,11 @@ export default function App() {
         <Image source={{ uri: capturedImage }} style={styles.previewImage} resizeMode="contain" />
       )}
       {isProcessing ? (
-        <Text style={styles.resultText}>Analyzing image...</Text>
+        <><Text style={styles.analyzingImageText}>Analyzing image... </Text><Text style={styles.analyzingImageText}>This may take a moment.</Text></>
       ) : (
         <Text style={styles.resultText}>{result}</Text>
       )}
-      <Button title="New Photo" onPress={handleRetake} />
+      <Button style={styles.newPhotoButton} title="New Photo" onPress={handleRetake} />
     </View>
   );
 }
@@ -165,7 +165,7 @@ const styles = StyleSheet.create({
   },
   resultContainer: {
     flex: 1,
-    backgroundColor: '#000',
+    backgroundColor: '#1c1c1e',
     justifyContent: 'center',
     alignItems: 'center',
     padding: 20
@@ -173,12 +173,23 @@ const styles = StyleSheet.create({
   previewImage: {
     flex: 1,
     alignSelf: 'stretch',
-    marginBottom: 20
+    marginBottom: 20,
+    marginTop: 40
   },
   resultText: {
-    fontSize: 18,
+    fontSize: 16,
     color: '#fff',
     textAlign: 'center',
-    marginBottom: 20
+    marginBottom: 20,
+    borderColor: '#fff',
+    borderWidth: 1,
+    padding: 10,
+    borderRadius: 10
+  },
+  analyzingImageText: {
+    fontSize: 16,
+    color: '#fff',
+    textAlign: 'center',
+    marginBottom: 10,
   }
 });
